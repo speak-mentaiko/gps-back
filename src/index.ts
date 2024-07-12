@@ -1,9 +1,16 @@
 import express from "express";
-import type { Express, Request, Response } from "express";
+import type { Express } from "express";
+import greetingController from "./controllers/greeting";
+import usersController from "./controllers/users";
 
 const app: Express = express();
-const port = 3001;
 
-app.get("/", (req: Request, res: Response) => res.send("Hello World!"));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+app.use("/greetings", greetingController);
+app.use("/users", usersController);
+
+app.listen(8080, () => {
+  console.log("Start on PORT:8080!");
+});
