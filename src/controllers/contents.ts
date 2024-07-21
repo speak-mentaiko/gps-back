@@ -4,13 +4,9 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 const router: Router = Router();
 
-const greetings = [
-  { id: 0, greeting: "Hello!" },
-  { id: 1, greeting: "Nice to meet you!" },
-];
-
-router.get("/", (req, res) => {
-  res.send(greetings);
+router.get("/", async (req, res) => {
+  const posts = await prisma.contents.findMany();
+  return res.send(posts);
 });
 
 router.post("/", async (req, res) => {
@@ -22,7 +18,7 @@ router.post("/", async (req, res) => {
       body,
     },
   });
-  return res.json(posts);
+  return res.send(posts);
 });
 
 export default router;
