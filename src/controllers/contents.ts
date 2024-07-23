@@ -5,14 +5,27 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 const router: Router = Router();
 
-router.get("/new", cors(), async (req, res) => {
-  res.set({ "Access-Control-Allow-Origin": "*" });
-
-  const posts = await prisma.contents.findMany();
+router.get("/list", cors(), async (req, res) => {
+  const posts = await prisma.contents.findMany({
+    select: {
+      id: true,
+      title: true,
+      name: true,
+    },
+  });
   return res.send(posts);
 });
 
-router.post("/", async (req, res) => {
+router.get("/list/:id", cors(), async (req, res) => {
+  const posts = await prisma.contents.findMany({
+    where: {
+      id: Number(req.params.id),
+    },
+  });
+  return res.send(posts);
+});
+
+router.post("/new", async (req, res) => {
   const { title, name, body } = req.body;
   const posts = await prisma.contents.create({
     data: {
