@@ -1,10 +1,13 @@
 import { Router } from "express";
+import cors from "cors";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 const router: Router = Router();
 
-router.get("/", async (req, res) => {
+router.get("/new", cors(), async (req, res) => {
+  res.set({ "Access-Control-Allow-Origin": "*" });
+
   const posts = await prisma.contents.findMany();
   return res.send(posts);
 });
