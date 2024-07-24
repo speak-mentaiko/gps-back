@@ -22,7 +22,7 @@ router.get("/list/:id", cors(), async (req, res) => {
       id: Number(req.params.id),
     },
   });
-  return res.send(posts);
+  return res.send(posts[0]);
 });
 
 router.post("/new", async (req, res) => {
