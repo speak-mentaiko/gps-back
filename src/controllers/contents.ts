@@ -10,7 +10,7 @@ const filePath = path.join(__dirname, "data.json");
 let num = 1;
 
 type data = {
-  id: number;
+  id: string;
   data: [];
 };
 
@@ -25,9 +25,7 @@ router.get("/list/:id", cors(), async (req, res) => {
   const { id } = req.params;
   const fileData = JSON.parse(fs.readFileSync(filePath, "utf-8"));
 
-  const record = fileData.records.find(
-    (record: data) => record.id === parseInt(id)
-  );
+  const record = fileData.records.find((record: data) => record.id === id);
 
   if (!record) {
     return res.status(404).json({ message: "Data not found." });
