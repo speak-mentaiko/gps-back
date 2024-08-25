@@ -11,6 +11,6 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/contents", contentsController);
 
-app.listen(8080, () => {
-  console.log("Start on PORT:8080!");
+app.listen(3000, () => {
+  console.log("Start on PORT:3000!");
 });
