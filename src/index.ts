@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import path from "path";
 import type { Express } from "express";
-import contentsController from "./controllers/contents";
+import contentsController from "./controllers/list";
 
 const app: Express = express();
 
@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
   res.render('index'); // "index.ejs"をレンダリング
 });
 
-app.use("/contents", contentsController);
+app.use("/list", contentsController);
 
 app.listen(3000, () => {
   console.log("Start on PORT:3000!");

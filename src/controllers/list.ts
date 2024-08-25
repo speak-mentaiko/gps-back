@@ -14,14 +14,14 @@ type data = {
   data: [];
 };
 
-router.get("/list", cors(), async (req, res) => {
+router.get("/", cors(), async (req, res) => {
   const fileData = JSON.parse(fs.readFileSync(filePath, "utf-8"));
   const idList = fileData.records.map((record: data) => record.id);
 
   res.status(200).json({ ids: idList });
 });
 
-router.get("/list/:id", cors(), async (req, res) => {
+router.get("/:id", cors(), async (req, res) => {
   const { id } = req.params;
   const fileData = JSON.parse(fs.readFileSync(filePath, "utf-8"));
 
